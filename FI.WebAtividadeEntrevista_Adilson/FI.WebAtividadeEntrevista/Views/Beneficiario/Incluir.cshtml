@@ -1,0 +1,33 @@
+﻿@model WebAtividadeEntrevista.Models.BeneficiarioModel
+
+@Html.AntiForgeryToken()
+<div class="row">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="col-md-5 ">
+        <div class="form-group">
+            <label for="CPF">CPF:</label>
+            <input required="required" type="text" onkeyup="testarCPF('NrCPF');" class="form-control" id="NrCPF" name="CPF" placeholder="Ex.: 001.001.001-11" maxlength="14">
+            @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-md-5 ">
+        <div class="form-group">
+            <label for="Nome">Nome:</label>
+            <input required="required" type="text" class="form-control" id="NmBeneficiario" name="Nome" placeholder="Ex.: João Silva" maxlength="50">
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group col-sm-2">
+            <label for="">&nbsp;&nbsp;</label>
+            <button id="btnIncluir" class="btn btn-success">Incluir</button>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/maskedinput")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validarCPF")
+}

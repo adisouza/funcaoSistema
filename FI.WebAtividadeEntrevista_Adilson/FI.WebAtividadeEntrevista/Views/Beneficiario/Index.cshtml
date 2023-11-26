@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebAtividadeEntrevista.Models.BeneficiarioModel>
+<table class="table col-lg-12">
+    @Html.Action("Incluir", "Beneficiario", @Html.DisplayNameFor(model => model.IdCliente))
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CPF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-lg-4">
+                        <input required="required" value ="@item.CPF" type="text" onkeyup='testarCPF("CPF_@item.Id");' class="form-control NrCPF" id="CPF_@item.Id" name="CPF" placeholder="Ex.: 001.001.001-11" maxlength="14">
+            </td>
+            <td class="col-lg-4">
+                        <input required="required" value="@item.Nome" type="text"  class="form-control" id="Nome_@item.Id" name="Nome" placeholder="Ex.: 001.001.001-11" maxlength="50" />
+            </td>
+            <td class="col-lg-4">
+                <div class="col-sm-5">
+                    <button id="btnAlterar_@item.Id" class="btn  btn-primary btnAlterar" data-alterar="@item.Id">Alterar</button>
+                </div>
+                <div class="col-sm-5">
+                    <button id="btnExcluir_@item.Id" class="btn  btn-primary btnExcluir" data-excluir="@item.Id">Excluir</button>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Scripts.Render("~/bundles/maskedinput")
+@Scripts.Render("~/bundles/beneficiarios")
+@section scripts{
+    <script>
+        var obj = @Html.Raw(Json.Encode(Model));
+     _id = @Html.Raw(Json.Encode(Model.First().Id))
+    </script>
+}
